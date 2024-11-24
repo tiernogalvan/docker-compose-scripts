@@ -1,0 +1,43 @@
+services:
+  mediawiki:
+    image: mediawiki
+    restart: always
+    networks:
+      - mediawiki_network
+    ports:
+      - 8081:80
+    volumes:
+      - /var/www/html/
+# After initial setup, download LocalSettings.php to the same directory as
+# this yaml and uncomment the following line and use compose to restart
+# the mediawiki service
+# - ./LocalSettings.php:/var/www/html/LocalSettings.php
+  mediawiki-db:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - mediawiki_network
+    environment:
+      MYSQL_DATABASE: wiki_db
+      MYSQL_ROOT_PASSWORD: Nohay2sin3
+      MYSQL_USER: wikimedia
+      MYSQL_PASSWORD: wikimedia
+    volumes:
+      - /var/lib/
+  phpmyadmin-mediawiki:
+    depends_on:
+      - mediawiki-db
+    image: phpmyadmin/phpmyadmin:5.2.1
+    networks:
+      - mediawiki_network
+    container_name: phpmyadmin-mediawiki
+    restart: always
+    ports:
+      - 8180:80
+    environment:
+      PMA_HOST: mediawiki-db
+      MYSQL_ROOT_PASSWORD: wikimedia
+networks:
+  mediawiki_network:
+    driver: bridge
+

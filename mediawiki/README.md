@@ -1,4 +1,4 @@
-# Instalación de Wordpress con Docker-Compose
+# Instalación de MediaWiki con Docker-Compose
 
 ## Prerequisitos
 
@@ -7,13 +7,13 @@
 
 ## Instalación
 
-1. Clonar este repositorio	
+1. Clonar este repositorio  
 ```bash 
 git clone git@github.com:tiernogalvan/docker-compose-scripts.git
 ``` 
 2. Abrir una terminal y navegar hasta la carpeta wordpress
 ```bash 
-cd docker-compose-scripts/wordpress
+cd docker-compose-scripts/mediawiki
 ```
 3. (Opcional) Editar la configuración del fichero compose.yml
 4. Crear el stack ejecutando
@@ -25,12 +25,15 @@ docker compose up -d
 
 La configuración por defecto de la base de datos MySQL es
 
-````properties
-MYSQL_ROOT_PASSWORD=Nohay2sin3
-MYSQL_USER=root
-MYSQL_PASSWORD=Nohay2sin3
-MYSQL_DATABASE=wordpress
+````yml
+MYSQL_DATABASE: wiki_db
+MYSQL_ROOT_PASSWORD: Nohay2sin3
+MYSQL_USER: wikimedia
+MYSQL_PASSWORD: wikimedia
 ````
+
+Durante la instalación hay que especificar el password de root (`Nohay2sin3`) y el host de la base de datos `mediawiki-db`
+
 Los puertos son:
-- Wordpress: 8080
-- PhpMyAdmin: 8180
+- MediaWiki: http://localhost:8081
+- PhPMyAdmin: http://localhost:8180
