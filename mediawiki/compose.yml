@@ -8,8 +8,6 @@ services:
       - 8081:80
     volumes:
       - /var/www/html/
-      # Descomenta esta linea despues de descargar LocalSettings.php
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
   mediawiki-db:
     image: mysql:5.7
     restart: always

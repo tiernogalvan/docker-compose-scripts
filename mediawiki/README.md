@@ -36,22 +36,13 @@ Durante la instalación hay que especificar el password de root (`Nohay2sin3`), 
 
 ![img.png](img.png)
 
-Una vez terminada la configuración y cuando se haya descargado el fichero `LocalSettings.php` realiza los siguientes:
-
-- Abre el archivo docker-compose-scripts/mediawiki y descomenta la línea
-```yml 
-- ./LocalSettings.php:/var/www/html/LocalSettings.php
-```
-
-- Después abre una nueva terminal y ejecuta los siguientes pasos
+Una vez terminada la configuración y cuando se haya descargado el fichero `LocalSettings.php` abre una terminal y ejecuta
 
 ```bash 
-cd docker-compose-scripts/mediawiki
-mv ~/Downloads/LocalSettings.php .
-docker compose up --build mediawiki -d
+docker compose cp ~/Downloads/LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 ```
 
-Después de esto ya es posib
+Después de esto ya puedes abrir la wiki
 
 Los puertos son:
 - MediaWiki: http://localhost:8081
