@@ -34,6 +34,8 @@ MYSQL_PASSWORD: wikimedia
 
 Durante la instalación hay que especificar el password de root (`Nohay2sin3`) y el host de la base de datos `mediawiki-db`
 
+![img.png](img.png)
+
 Los puertos son:
 - MediaWiki: http://localhost:8081
 - PhPMyAdmin: http://localhost:8180
