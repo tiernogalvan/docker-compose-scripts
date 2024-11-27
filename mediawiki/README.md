@@ -32,7 +32,7 @@ MYSQL_USER: wikimedia
 MYSQL_PASSWORD: wikimedia
 ````
 
-Durante la instalación hay que especificar el password de root (`Nohay2sin3`) y el host de la base de datos `mediawiki-db`
+Durante la instalación hay que especificar el password de root (`Nohay2sin3`), el host de la base de datos `mediawiki-db` y el nombre de la base de datos `wiki_db`
 
 ![img.png](img.png)
 
