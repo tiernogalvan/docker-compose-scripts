@@ -36,11 +36,12 @@ Durante la instalación hay que especificar el password de root (`Nohay2sin3`), 
 
 ![img.png](img.png)
 
-Una vez terminada la configuración y cuando se haya descargado el fichero `LocalSettings.php` abre una terminal y ejecuta
+Una vez terminada la configuración y cuando se haya descargado el fichero `LocalSettings.php` abre una terminal y, desde el directorio `docker-compose-scripts/mediawiki`, ejecuta
 
 ```bash 
 docker compose cp ~/Downloads/LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 ```
+*NOTA* El directorio de descargas podría ser `Descargas` en algunos sistemas
 
 Después de esto ya puedes abrir la wiki
 
