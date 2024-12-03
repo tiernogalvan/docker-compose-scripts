@@ -9,7 +9,7 @@
 
 1. Clonar este repositorio  
 ```bash 
-git clone git@github.com:tiernogalvan/docker-compose-scripts.git
+git clone https://github.com/tiernogalvan/docker-compose-scripts.git
 ``` 
 2. Abrir una terminal y navegar hasta la carpeta wordpress
 ```bash 
@@ -20,28 +20,20 @@ cd docker-compose-scripts/mediawiki
 ```bash 
 docker compose up -d
 ```
-
-## Configuración 
-
-La configuración por defecto de la base de datos MySQL es
-
-````yml
-MYSQL_DATABASE: wiki_db
-MYSQL_ROOT_PASSWORD: Nohay2sin3
-MYSQL_USER: wikimedia
-MYSQL_PASSWORD: wikimedia
-````
-
-Durante la instalación hay que especificar el password de root (`Nohay2sin3`), el host de la base de datos `mediawiki-db` y el nombre de la base de datos `wiki_db`
+5. Entra el la dirección http://localhost:8081 y sigue los pasos de la instalación. Durante la instalación hay que especificar el password de root (`Nohay2sin3`), el host de la base de datos `mediawiki-db` y el nombre de la base de datos `wiki_db`
 
 ![img.png](img.png)
 
-Una vez terminada la configuración y cuando se haya descargado el fichero `LocalSettings.php` abre una terminal y, desde el directorio `docker-compose-scripts/mediawiki`, ejecuta
+Una vez terminada la configuración, se descarga el fichero `LocalSettings.php`
 
+6. Desde la terminal vamos a copiar `LocalSettings.php` dentro del contendor de MediaWiki. Para ello, ejecuta el siguiente comando estando en el directorio `docker-compose-scripts/mediawiki`
+```bash 
+docker compose cp ~/Descargas/LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
+```
+*NOTA* El directorio de descargas podría ser `Downloads` en algunos sistemas, si no funciona el comando anterior prueba con este otro
 ```bash 
 docker compose cp ~/Downloads/LocalSettings.php mediawiki:/var/www/html/LocalSettings.php
 ```
-*NOTA* El directorio de descargas podría ser `Descargas` en algunos sistemas
 
 Después de esto ya puedes abrir la wiki
 

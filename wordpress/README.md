@@ -9,7 +9,7 @@
 
 1. Clonar este repositorio	
 ```bash 
-git clone git@github.com:tiernogalvan/docker-compose-scripts.git
+git clone https://github.com/tiernogalvan/docker-compose-scripts.git
 ``` 
 2. Abrir una terminal y navegar hasta la carpeta wordpress
 ```bash 
