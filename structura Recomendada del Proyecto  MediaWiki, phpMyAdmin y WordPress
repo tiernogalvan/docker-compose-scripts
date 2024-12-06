@@ -1,0 +1,20 @@
+Estructura Recomendada del Proyecto
+Si deseas instalar MediaWiki, phpMyAdmin y WordPress en un entorno Docker Compose, la estructura del proyecto debería organizarse para manejar tres aplicaciones independientes con sus respectivas bases de datos y servicios adicionales, como un servidor web y una red compartida.
+
+project-directory/
+├── docker-compose.yml      # Archivo principal para configurar todos los servicios
+├── .env                    # Variables de entorno para credenciales y configuraciones
+├── mediawiki/              # Carpeta para MediaWiki
+│   ├── LocalSettings.php   # Configuración personalizada de MediaWiki (opcional)
+│   ├── images/             # Subida de archivos e imágenes (persistencia)
+│   └── extensions/         # Extensiones personalizadas de MediaWiki
+├── wordpress/              # Carpeta para WordPress
+│   ├── wp-content/         # Persistencia de contenido de WordPress
+│   ├── themes/             # Carpeta para temas personalizados
+│   └── plugins/            # Carpeta para plugins personalizados
+├── mysql-mediawiki/        # Persistencia para la base de datos de MediaWiki
+├── mysql-wordpress/        # Persistencia para la base de datos de WordPress
+├── logs/                   # Carpeta para almacenar logs (opcional)
+│   ├── mediawiki/
+│   └── wordpress/
+└── phpmyadmin/             # Configuración adicional de phpMyAdmin (opcional)
