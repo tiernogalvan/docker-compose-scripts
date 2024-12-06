@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # MediaWiki
+  mediawiki:
+    image: mediawiki:latest
+    container_name: mediawiki
+    restart: always
+    ports:
+      - "8081:80"          # MediaWiki disponible en http://localhost:8081
+    volumes:
+      - ./mediawiki/images:/var/www/html/images
+      - ./mediawiki/extensions:/var/www/html/extensions
+      - ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php
+    environment:
+      MEDIAWIKI_DB_HOST: mediawiki-db
+      MEDIAWIKI_DB_NAME: wiki_db
+      MEDIAWIKI_DB_USER: wiki_user
+      MEDIAWIKI_DB_PASSWORD: wiki_password
+    depends_on:
+      - mediawiki-db
+    networks:
+      - app_network
+
+  # Base de datos de MediaWiki
+  mediawiki-db:
+    image: mysql:5.7
+    container_name: mediawiki-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wiki_db
+      MYSQL_USER: wiki_user
+      MYSQL_PASSWORD: wiki_password
+    volumes:
+      - ./mysql-mediawiki:/var/lib/mysql
+    networks:
+      - app_network
+
+  # WordPress
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    restart: always
+    ports:
+      - "8082:80"          # WordPress disponible en http://localhost:8082
+    volumes:
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/themes:/var/www/html/wp-content/themes
+      - ./wordpress/plugins:/var/www/html/wp-content/plugins
+    environment:
+      WORDPRESS_DB_HOST: wordpress-db
+      WORDPRESS_DB_NAME: wp_db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+    depends_on:
+      - wordpress-db
+    networks:
+      - app_network
+
+  # Base de datos de WordPress
+  wordpress-db:
+    image: mysql:5.7
+    container_name: wordpress-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+    volumes:
+      - ./mysql-wordpress:/var/lib/mysql
+    networks:
+      - app_network
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8181:80"          # phpMyAdmin disponible en http://localhost:8181
+    environment:
+      PMA_HOSTS: mediawiki-db,wordpress-db
+      MYSQL_ROOT_PASSWORD: root_password
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
