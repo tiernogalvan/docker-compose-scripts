@@ -13,6 +13,7 @@ git clone https://github.com/tiernogalvan/docker-compose-scripts.git
 ``` 
 2. Abrir una terminal y navegar hasta la carpeta wordpress
 ```bash 
+mkdir ~/mediawiki-content
 cd docker-compose-scripts/mediawiki
 ```
 3. (Opcional) Editar la configuración del fichero compose.yml

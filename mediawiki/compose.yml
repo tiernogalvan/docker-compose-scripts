@@ -1,3 +1,4 @@
+name: ${USER}-mediawiki
 services:
   mediawiki:
     image: mediawiki
@@ -8,6 +9,9 @@ services:
       - 8082:80
     volumes:
       - mediawiki_files:/var/www/html/
+    depends_on:
+      mediawiki-db:
+        condition: service_healthy
   mediawiki-db:
     image: mysql:5.7
     restart: always
@@ -18,11 +22,17 @@ services:
       MYSQL_ROOT_PASSWORD: Nohay2sin3
       MYSQL_USER: wikimedia
       MYSQL_PASSWORD: wikimedia
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
     volumes:
       - mediawiki_data:/var/lib/mysql
   phpmyadmin-mediawiki:
     depends_on:
-      - mediawiki-db
+      mediawiki-db:
+        condition: service_healthy
     image: phpmyadmin/phpmyadmin:5.2.1
     networks:
       - mediawiki_network
@@ -44,4 +54,3 @@ volumes:
         type: 'none'
         o: 'bind'
         device: '~/mediawiki-content'
-
