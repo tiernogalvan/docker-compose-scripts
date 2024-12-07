@@ -5,9 +5,9 @@ services:
     networks:
       - mediawiki_network
     ports:
-      - 8081:80
+      - 8082:80
     volumes:
-      - /var/www/html/
+      - mediawiki_files:/var/www/html/
   mediawiki-db:
     image: mysql:5.7
     restart: always
@@ -19,7 +19,7 @@ services:
       MYSQL_USER: wikimedia
       MYSQL_PASSWORD: wikimedia
     volumes:
-      - /var/lib/
+      - mediawiki_data:/var/lib/mysql
   phpmyadmin-mediawiki:
     depends_on:
       - mediawiki-db
@@ -29,11 +29,19 @@ services:
     container_name: phpmyadmin-mediawiki
     restart: always
     ports:
-      - 8180:80
+      - 8280:80
     environment:
       PMA_HOST: mediawiki-db
       MYSQL_ROOT_PASSWORD: wikimedia
 networks:
   mediawiki_network:
     driver: bridge
+volumes:
+  mediawiki_data:
+  mediawiki_files:
+      driver: local
+      driver_opts:
+        type: 'none'
+        o: 'bind'
+        device: '~/mediawiki-content'
 

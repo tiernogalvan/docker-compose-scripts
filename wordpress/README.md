@@ -34,3 +34,12 @@ MYSQL_DATABASE=wordpress
 Los puertos son:
 - Wordpress: 8080
 - PhpMyAdmin: 8180
+
+
+## Editar los archivos desde un editor del host
+
+Si deseas editar los archivos creados por Wordpress directamente en un editor primero debes dar permisos al usuario del host par modificar los mismos. Para ello, abre una terminal y ejecuta lo siguiente 
+```bash 
+cd ~/docker-compose-scripts/wordpress
+docker compose exec wordpress chmod 777 -R /var/www/html/wp-content
+```

@@ -20,7 +20,7 @@ cd docker-compose-scripts/mediawiki
 ```bash 
 docker compose up -d
 ```
-5. Entra el la dirección http://localhost:8081 y sigue los pasos de la instalación. Durante la instalación hay que especificar el password de root (`Nohay2sin3`), el host de la base de datos `mediawiki-db` y el nombre de la base de datos `wiki_db`
+5. Entra el la dirección http://localhost:8082 y sigue los pasos de la instalación. Durante la instalación hay que especificar el password de root (`Nohay2sin3`), el host de la base de datos `mediawiki-db` y el nombre de la base de datos `wiki_db`
 
 ![img.png](img.png)
 
@@ -38,5 +38,13 @@ docker compose cp ~/Downloads/LocalSettings.php mediawiki:/var/www/html/LocalSet
 Después de esto ya puedes abrir la wiki
 
 Los puertos son:
-- MediaWiki: http://localhost:8081
-- PhPMyAdmin: http://localhost:8180
+- MediaWiki: http://localhost:8082
+- PhPMyAdmin: http://localhost:8280
+
+## Editar los archivos desde un editor del host
+
+Si deseas editar los archivos creados por MediaWiki directamente en un editor primero debes dar permisos al usuario del host par modificar los mismos. Para ello, abre una terminal y ejecuta lo siguiente 
+```bash 
+cd ~/docker-compose-scripts/mediawiki
+docker compose exec mediawiki chmod 777 -R /var/www/html/
+```
