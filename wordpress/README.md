@@ -32,7 +32,7 @@ MYSQL_PASSWORD=Nohay2sin3
 MYSQL_DATABASE=wordpress
 ````
 Los puertos son:
-- Wordpress: 8080
+- Wordpress: 8081
 - PhpMyAdmin: 8180
 
 
